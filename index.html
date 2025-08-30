@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quadro de Estudos</title>
+
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Quadro de Estudos</h1>
+    <div class="row">
+      <span class="note">Progresso Total:</span>
+      <span id="total" class="pill">0%</span>
+    </div>
+  </header>
+
+  <main class="paper">
+    <ul id="list"></ul>
+  </main>
+
+  <div class="footer">
+    <button id="show-io-modal">Gerenciar Dados</button>
+  </div>
+
+  <!-- Botão Flutuante para Adicionar Matéria -->
+  <button id="show-add-modal" class="fab" title="Adicionar nova matéria">+</button>
+
+  <!-- MODAL PARA ADICIONAR MATÉRIA -->
+  <div id="add-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <button class="modal-close" title="Fechar">&times;</button>
+      <h2>Nova Matéria</h2>
+      <div class="form-group">
+        <label for="newName">Nome da matéria</label>
+        <input id="newName" type="text" placeholder="Ex: Biologia" />
+      </div>
+      <div class="form-group">
+        <label for="newCount">Quantidade de caixas</label>
+        <input id="newCount" type="number" min="1" max="100" step="1" value="6" />
+      </div>
+      <button id="add" class="btn-success">Adicionar</button>
+    </div>
+  </div>
+
+  <!-- MODAL PARA IMPORTAR/EXPORTAR DADOS -->
+  <div id="io-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <button class="modal-close" title="Fechar">&times;</button>
+      <h2>Gerenciar Dados</h2>
+      <p>Salve seu progresso ou carregue um arquivo salvo.</p>
+      <div class="io-actions">
+        <button id="export" class="btn-primary">Exportar para Arquivo</button>
+        <label class="file">
+          <span class="btn-like btn-primary">Importar de Arquivo</span>
+          <input id="import" type="file" accept="application/json" />
+        </label>
+      </div>
+      <hr>
+      <div class="danger-zone">
+        <p>Ações permanentes que não podem ser desfeitas.</p>
+        <button id="clearAll" class="btn-warning" title="Desmarca todas as caixas de todas as matérias">Desmarcar Tudo</button>
+        <button id="reset" class="btn-danger" title="Apaga todas as matérias e volta ao modelo inicial">Apagar Tudo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Template para cada matéria -->
+  <template id="subject-template">
+    <li class="subject" draggable="true">
+      <div>
+        <div class="name" contenteditable="true"></div>
+        <div class="progress"></div>
+      </div>
+      <div class="boxes"></div>
+      <div class="controls">
+        <button class="btn-add btn-success" title="Adicionar caixa">+1</button>
+        <button class="btn-remove btn-warning" title="Remover última">−1</button>
+        <button class="btn-clear btn-warning" title="Desmarcar esta matéria">Limpar</button>
+        <button class="btn-delete btn-danger" title="Excluir matéria">Remover</button>
+      </div>
+    </li>
+  </template>
+
+  <!-- Script -->
+  <script src="script.js" defer></script>
+</body>
+</html>
